@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -99,11 +99,11 @@ body,
   height: 100vh;
   width: 100vw;
   overflow-x: hidden;
-}
+} */
 
 /* Grid */
 
-.container {
+/* .container {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
@@ -175,16 +175,14 @@ body,
 .hidden-sm {
   display: none;
 }
-
-@media only screen and (min-width: 33.75em) {
-  /* 540px */
+ */
+/* @media only screen and (min-width: 33.75em) {
   .container {
     width: 80%;
   }
 }
 
 @media only screen and (min-width: 45em) {
-  /* 720px */
   .col-1 {
     width: 4.33%;
   }
@@ -227,14 +225,12 @@ body,
 }
 
 @media only screen and (min-width: 60em) {
-  /* 960px */
   .container {
     width: 75%;
     max-width: 60rem;
   }
 }
 
-/* Forms */
 
 label {
   display: block;
@@ -258,7 +254,6 @@ input[disabled] {
   color: var(--custom-color-secondary);
 }
 
-/* Utils */
 
 .block {
   display: block;
@@ -303,8 +298,6 @@ input[disabled] {
   opacity: 50%;
 }
 
-/* Button */
-
 button,
 .button {
   color: var(--custom-color);
@@ -325,8 +318,6 @@ button.primary,
   background-color: var(--custom-color-brand);
   border: 1px solid var(--custom-color-brand);
 }
-
-/* Widgets */
 
 .card {
   width: 100%;
@@ -379,7 +370,6 @@ button.primary,
 }
 
 @media only screen and (min-width: 60em) {
-  /* 960px */
   .footer > div:first-child {
     display: flex;
   }
@@ -448,4 +438,4 @@ button.primary,
   position: absolute;
   white-space: nowrap;
   width: 1px;
-}
+} */

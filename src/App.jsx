@@ -1,11 +1,11 @@
-import "./App.css";
-import { useState, useEffect } from "react";
-import { supabase } from "./supabaseClient";
-import Auth from "./Auth";
-import AddBooks from "./AddBooks";
+//import Auth from "./Auth";
 //import Account from "./Account";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Update from "./pages/Update";
+import Home from "./pages/Home";
+import Create from "./pages/Create";
 
-export default function App() {
+/* export default function App() {
   const [session, setSession] = useState(null);
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -19,13 +19,29 @@ export default function App() {
 
   return (
     <div className="container" style={{ padding: "50px 0 100px 0" }}>
-      {!session ? (
+        {!session ? (
         <Auth />
-      ) : (
-        //<Account key={session.user.id} session={session} />
-        <AddBooks session={session}/>
-      )}
+      ) : ( 
+        <Account key={session.user.id} session={session} />
+     )}
     </div>
+  );
+} */
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <nav>
+        <h1>本棚</h1>
+        <Link to="/">Home</Link>
+        <Link to="/create">本を追加</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/create" element={<Create />} />
+        <Route path="/:id" element={<Update />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

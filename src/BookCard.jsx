@@ -6,13 +6,15 @@ export default function BookCard({ book, onDelete }) {
     const { data, error } = await supabase
       .from("books")
       .delete()
-      .eq("id", book.id);
+      .eq("id", book.id)
+      .select();
 
     if (error) {
       console.log(error);
     }
 
     if (data) {
+      console.log("fired!");
       console.log(data);
       onDelete(book.id);
     }

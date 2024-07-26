@@ -1,31 +1,22 @@
+//import { useState } from "react";
+//import { supabase } from "./supabaseClient";
+
 import { useState } from "react";
-import { supabase } from "./supabaseClient";
 
-export default function Auth() {
-  const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
-
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithOtp({ email });
-
-    if (error) {
-      alert(error.error_description || error.message);
-    } else {
-      alert("Check your email for the login link!");
-    }
-    setLoading(false);
-  };
-
+export default function CustomAuth({
+  email,
+  handleEmail,
+  password,
+  handlePassword,
+  signUp,
+  signIn,
+}) {
+  console.log("email and password", email, password);
+  const [isUser, setIsUser] = useState(false);
   return (
     <div className="row flex flex-center">
       <div className="col-6 form-widget">
-        <h1 className="header">Supabase + React</h1>
-        <p className="description">
-          Sign in via magic link with your email below
-        </p>
-        <form className="form-widget" onSubmit={handleLogin}>
+        <form className="form-widget">
           <div>
             <input
               className="inputField"
@@ -33,13 +24,32 @@ export default function Auth() {
               placeholder="Your email"
               value={email}
               required={true}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => handleEmail(e.target.value)}
+            />
+            <input
+              className="inputField"
+              type="password"
+              placeholder="Your password"
+              value={password}
+              required={true}
+              onChange={(e) => handlePassword(e.target.value)}
             />
           </div>
-          <div>
-            <button className={"button block"} disabled={loading}>
-              {loading ? <span>Loading</span> : <span>Send magic link</span>}
-            </button>
+          <div className="btn-container">
+            {!isUser ? (
+              <>
+                <button className="button block" onClick={signUp}>
+                  Sign up
+                </button>
+                <span onClick={() => setIsUser(true)} className="text-center">
+                  Already signed up? Sign in
+                </span>
+              </>
+            ) : (
+              <button className="button block" onClick={signIn}>
+                Sign in
+              </button>
+            )}
           </div>
         </form>
       </div>

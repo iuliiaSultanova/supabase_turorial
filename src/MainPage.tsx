@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Update from "/pages/Update";
+import Update from "./pages/Update";
 import Home from "./pages/Home";
 import Create from "./pages/Create";
 import Sandbox from "./pages/Sandbox";

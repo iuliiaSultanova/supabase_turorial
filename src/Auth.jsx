@@ -1,21 +1,22 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [session, setSession] = useState();
+  const [isUser, setIsUser] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
+      setSession(session);
+    });
 
     supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
+      setSession(session);
+    });
   }, []);
 
   const handleLogin = async (event) => {
@@ -24,17 +25,36 @@ export default function Auth() {
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
-        password
-      })
-      if (error) throw error
+        password,
+      });
+      if (error) throw error;
       navigate("/");
     } catch (err) {
+      console.log(err);
       throw err;
     } finally {
-      setEmail('')
-      setPassword('')
+      setEmail("");
+      setPassword("");
     }
+  };
 
+  const handleSignup = async () => {
+    event.preventDefault();
+
+    try {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+      if (error) throw error;
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      throw err;
+    } finally {
+      setEmail("");
+      setPassword("");
+    }
   };
 
   return (
@@ -60,9 +80,18 @@ export default function Auth() {
             />
           </div>
           <div>
-            <button className="button block" onClick={handleLogin}>
-              Sign in
-            </button>
+            {isUser ? (
+              <button className="button block" onClick={handleLogin}>
+                Sign in
+              </button>
+            ) : (
+              <button className="button block" onClick={handleSignup}>
+                Sign up
+              </button>
+            )}
+            <span onClick={() => setIsUser(true)}>
+              Already a member? Sign in
+            </span>
           </div>
         </form>
       </div>
